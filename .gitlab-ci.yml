@@ -14,7 +14,7 @@ test_app:
         - apt-get -y install libtiff5-dev
         - apt-get -y install libjpeg62-turbo-dev
         - apt-get -y install libfreetype6-dev
-        - apt-get -y install liblcms1-dev
+        - apt-get -y install liblcms2-dev
         - apt-get -y install libwebp-dev
         - apt-get -y install graphviz-dev
         - pip install --upgrade pip
