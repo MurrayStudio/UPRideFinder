@@ -2,8 +2,8 @@ image: python:3.5
 
 test_app:
     script:
-        - sudo chmod +x utility/install*
-        - sudo utility/install_os_dependencies.sh
-        - sudo utility/install_python_dependencies.sh
-        - wget https://bootstrap.pypa.io/get-pip.py --output-document=get-pip.py; chmod +x get-pip.py; sudo -H python3 get-pip.py
+        - chmod +x utility/install*
+        - utility/install_os_dependencies.sh
+        - utility/install_python_dependencies.sh
+        - wget https://bootstrap.pypa.io/get-pip.py --output-document=get-pip.py; chmod +x get-pip.py;  python3 get-pip.py
         - python manage.py test -k
