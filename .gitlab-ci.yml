@@ -18,6 +18,6 @@ test_app:
         - apt-get -y install libwebp-dev
         - apt-get -y install graphviz-dev
         - pip install --upgrade pip
-        - pip install -r $PROJECT_DIR/requirements/local.txt
-        - pip install -r $PROJECT_DIR/requirements/test.txt
+        - pip install -r requirements/local.txt
+        - pip install -r requirements/test.txt
         - python manage.py test -k
