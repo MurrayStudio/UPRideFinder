@@ -1,13 +1,2 @@
-image: python:3.5
-
-all_tests:
-    script:
-        - apt-get update -qq
-        - apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
-        - apt-get install -qq libtiff4-dev libjpeg8-dev libfreetype6-dev liblcms1-dev libwebp-dev
-        - apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
-        - apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
-        - apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl 
-        - pip install -r requirements/base.txt
-        - pip install -r requirements/test.txt
-        - python3 manage.py test -k
+test_app:
+    script: python manage.py test
