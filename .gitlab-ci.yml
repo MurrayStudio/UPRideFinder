@@ -19,5 +19,7 @@ test_app:
         - apt-get -y install graphviz-dev
         - pip install --upgrade pip
         - pip install -r requirements/local.txt
+        - pip install django-appconf
+        - pip install -r requirements/local.txt
         - pip install -r requirements/test.txt
         - python manage.py test -k
