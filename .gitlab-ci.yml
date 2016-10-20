@@ -1,4 +1,4 @@
-image: python3.5
+image: python35
 
 test_app:
     script:
