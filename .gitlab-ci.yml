@@ -22,4 +22,4 @@ test_app:
         - pip install django-compressor
         - pip install -r requirements/local.txt
         - pip install -r requirements/test.txt
-        - python manage.py test -k
+        - coverage run manage.py test
