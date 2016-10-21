@@ -23,3 +23,4 @@ test_app:
         - pip install -r requirements/local.txt
         - pip install -r requirements/test.txt
         - coverage run manage.py test
+        - coverage report
