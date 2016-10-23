@@ -2,25 +2,6 @@ image: python:3.5
 
 test_app:
     script:
-        - apt-get -y update
-        - apt-get -y install build-essential
-        - apt-get -y install python3-pip
-        - apt-get -y install python3-dev python3-setuptools
-        - apt-get -y install git
-        - apt-get -y install supervisor
-        - apt-get -y install gettext
-        - apt-get -y install zlib1g-dev
-        - apt-get -y install libpq-dev
-        - apt-get -y install libtiff5-dev
-        - apt-get -y install libjpeg62-turbo-dev
-        - apt-get -y install libfreetype6-dev
-        - apt-get -y install liblcms2-dev
-        - apt-get -y install libwebp-dev
-        - apt-get -y install graphviz-dev
-        - pip install --upgrade pip
-        - pip install django-appconf
-        - pip install django-compressor
-        - pip install -r requirements/local.txt
-        - pip install -r requirements/test.txt
+        - sh ./utility/gitlab-ci-setup.sh
         - coverage run manage.py test
         - coverage report
