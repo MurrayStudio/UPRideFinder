@@ -52,6 +52,8 @@ htmlcov
 #!.idea/vcs.xml
 #!.idea/webResources.xml
 
+# Test db
+uprfdb
 
 # Vim
 
