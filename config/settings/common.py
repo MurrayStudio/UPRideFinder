@@ -38,7 +38,7 @@ THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
+#    'allauth.socialaccount',  # registration
 )
 
 # Apps specific for this project go here.
@@ -238,7 +238,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_ADAPTER = 'up_ride_finder.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'up_ride_finder.users.adapters.SocialAccountAdapter'
+#SOCIALACCOUNT_ADAPTER = 'up_ride_finder.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model
@@ -258,3 +258,7 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+  }

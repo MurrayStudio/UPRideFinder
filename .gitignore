@@ -40,17 +40,20 @@ htmlcov
 *.pot
 
 # Pycharm
+.idea
 .idea/*
 
 # Provided default Pycharm Run/Debug Configurations should be tracked by git
 # In case of local modifications made by Pycharm, use update-index command
 # for each changed file, like this:
 # git update-index --assume-unchanged .idea/up_ride_finder.iml
-!.idea/runConfigurations/
-!.idea/up_ride_finder.iml
-!.idea/vcs.xml
-!.idea/webResources.xml
+#!.idea/runConfigurations/
+#!.idea/up_ride_finder.iml
+#!.idea/vcs.xml
+#!.idea/webResources.xml
 
+# Test db
+uprfdb
 
 # Vim
 
