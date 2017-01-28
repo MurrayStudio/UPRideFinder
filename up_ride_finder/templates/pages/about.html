@@ -3,3 +3,8 @@
 {% block content %}
     <p>This is the about page!</p>
 {% endblock content %}
+
+{% block nav_items %}
+<li class="active"><a href="{% url 'home' %}">Example</a></li>
+<li><a href="{% url 'about' %}">Example2</a></li>
+{% endblock nav_items %}
