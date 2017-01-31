@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet"> 
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> 
+{% endblock %}
+
+{% block nav_items %}
+<li><a href="{% url 'home' %}">Home</a></li> 
+<li class="active"><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'tripdetails' %}">Trip Details</a></li>
+{% endblock nav_items %}
 
 {% block content %}
     <p>This is the about page!</p>
 {% endblock content %}
-
-{% block nav_items %}
-<li class="active"><a href="{% url 'home' %}">Example</a></li>
-<li><a href="{% url 'about' %}">Example2</a></li>
-{% endblock nav_items %}
