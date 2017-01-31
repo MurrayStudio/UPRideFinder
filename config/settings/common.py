@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     # custom users app
     'up_ride_finder.users.apps.UsersConfig',
+    'up_ride_finder.rides.apps.RidesConfig',
     # Your stuff: custom apps go here
 )
 
