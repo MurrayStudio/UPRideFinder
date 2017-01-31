@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet"> 
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> 
+{% endblock %} {% block nav_items %}
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+<li class="active"><a href="{% url 'tripdetails' %}">Trip Details</a></li>
+{% endblock nav_items %} {% block content %}
+
+
+<!--A Trip Detail Card-->
+<div class="wrapper">
+
+    <div class="card radius shadowDepth1">
+        <div class="card__image border-tlr-radius">
+            <img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">
+        </div>
+
+        <div class="card__content card__padding">
+            <div class="card__share">
+                <div class="card__social">
+                    <a class="share-icon facebook" href="#"><span class="fa fa-facebook"></span></a>
+                    <a class="share-icon twitter" href="#"><span class="fa fa-twitter"></span></a>
+                    <a class="share-icon googleplus" href="#"><span class="fa fa-google-plus"></span></a>
+                </div>
+
+                <a id="share" class="share-toggle share-icon" href="#"></a>
+            </div>
+
+            <div class="card__meta">
+                <a href="#">March 17th</a>
+                <time>Departs: 3pm</time>
+            </div>
+
+            <article class="card__article">
+                <h2><a href="#">UP -> Seattle</a></h2>
+
+                <p>Looking for 3 others. Come Join me!</p>
+            </article>
+        </div>
+
+        <div class="card__action">
+
+            <div class="card__author">
+                <img src="http://lorempixel.com/40/40/sports/" alt="user">
+                <div class="card__author-content">
+                    <p>Organized by joe17@up.edu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascript %} {% compress js %}
+<script src="{% static 'js/tripdetails.js' %}"></script>
+{% endcompress %} {% endblock javascript %}
