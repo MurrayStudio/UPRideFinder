@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 from ..users.models import User
 from .validators import valid_zip, future_date
 
