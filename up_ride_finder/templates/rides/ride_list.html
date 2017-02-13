@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Rides</h2>
+    <ul>
+        {% for ride in ride_list %}
+            <li>{{ ride.trip_summary }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

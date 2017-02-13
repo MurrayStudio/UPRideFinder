@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 from .models import Ride
-from .forms import RideForm
+from .forms import RideAdminForm
 # Register your models here.
 
 
 class RideAdmin(admin.ModelAdmin):
-    form = RideForm
+    form = RideAdminForm
 
 admin.site.register(Ride, RideAdmin)

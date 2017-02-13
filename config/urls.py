@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^users/', include('up_ride_finder.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
 
-    # Your stuff: custom urls includes go here
+    # Rides
+    url(r'^rides/', include('up_ride_finder.rides.urls', namespace='rides')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

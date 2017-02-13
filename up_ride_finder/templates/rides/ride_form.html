@@ -1,0 +1,9 @@
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="/rides/create/" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock content %}
