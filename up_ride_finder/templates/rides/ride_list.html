@@ -1,24 +1,24 @@
 {% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
 <link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
 <link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %} {% for ride in ride_list %}
-<li>
-    <!--A Trip Detail Card-->
-    <div class="wrapper">
 
-        <div class="card radius shadowDepth1">
-            <div class="card__content card__padding">
+<!--A Trip Detail Card-->
+<div class="wrapper">
 
-                <article class="card__article">
-                    <h2><a href="/rides/{{ ride.id }}/">{{ ride.origin }} -> {{ ride.destination }}</a></h2>
-                    <div class="card__meta">
-                        <a href="#">{{ ride.when }}</a>
-                    </div>
-                    <a>{{ ride.trip_summary }}</a>
-                </article>
-            </div>
+    <div class="card radius shadowDepth1">
+        <div class="card__content card__padding">
+
+            <article class="card__article">
+                <h2><a href="/rides/{{ ride.id }}/">{{ ride.origin }} -> {{ ride.destination }}</a></h2>
+                <div class="card__meta">
+                    <a href="#">{{ ride.when }}</a>
+                </div>
+                <a>{{ ride.trip_summary }}</a>
+            </article>
         </div>
     </div>
-    <!--A Trip Detail Card End-->
+</div>
+<!--A Trip Detail Card End-->
 
-</li>
+
 {% endfor %} {% endblock content %}

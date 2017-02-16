@@ -14,45 +14,54 @@
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-    
-    
-    <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    {% block css %}
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    {% compress css %}
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endcompress %} {% endblock %}
+
+    <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+        {% block css %}
+        <!-- Your stuff: Third-party CSS libraries go here -->
+        {% compress css %}
+        <!-- This file stores project-specific CSS -->
+        <link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endcompress %} {% endblock %}
 
 </head>
 
 <body>
 
-     {% block nav %}
+    {% block nav %}
     <div class="m-b-1">
         <!-- Static navbar -->
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                        aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{% url 'rides:list' %}">UP Ride Finder</a>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'rides:list' %}">UP Ride Finder</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        {% block nav_items %}
-                        <li class="active"><a href="{% url 'rides:create' %}">Create Trip</a></li>
-                        {% endblock nav_items %}
+                        {% block nav_create_trip %}
+                        <li class="nav-link"><a href="{% url 'rides:create' %}">Create Trip</a></li>
+                        {% endblock nav_create_trip %}
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        {% block nav_trip_list %}
+                        <li class="nav-link"><a href="{% url 'rides:list' %}">Trip List</a></li>
+                        {% endblock nav_trip_list %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
+                             {% block nav_my_profile %}
                             <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+                             {% endblock nav_my_profile %}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
@@ -72,13 +81,9 @@
         </nav>
 
     </div>
-    {% endblock nav %}
-
-    {% block container %}
+    {% endblock nav %} {% block container %}
     <div class="container">
-    {% endblock container %}
-
-        {% if messages %} {% for message in messages %}
+        {% endblock container %} {% if messages %} {% for message in messages %}
         <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
         {% endfor %} {% endif %} {% block content %}
         <p>Use this document as a way to quick start any new project.</p>
@@ -92,18 +97,21 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    
-    <!-- Required by Bootstrap v4 Alpha 4 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <!-- Your stuff: Third-party javascript libraries go here -->
-    {% block javascript %}
-    <!-- place project specific Javascript in this file -->
-    {% compress js %}
-    <script src="{% static 'js/project.js' %}"></script>
-    {% endcompress %} {% endblock javascript %}
+    <!-- Required by Bootstrap v4 Alpha 4 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8"
+            crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+                <!-- Your stuff: Third-party javascript libraries go here -->
+                {% block javascript %}
+                <!-- place project specific Javascript in this file -->
+                {% compress js %}
+                <script src="{% static 'js/project.js' %}"></script>
+                {% endcompress %} {% endblock javascript %}
 </body>
 
 </html>
