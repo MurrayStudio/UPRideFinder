@@ -1,4 +1,27 @@
-{% block content %}
-    <h2>Ride</h2>
-    {{ ride.destination }}
-{% endblock %}
+{% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %}
+
+<!--A Trip Detail Card-->
+<div class="wrapper">
+
+    <div class="card radius shadowDepth1">
+        <div class="card__image border-tlr-radius">
+            <img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">
+        </div>
+
+        <div class="card__content card__padding">
+
+            <article class="card__article">
+                <h2><a href="#">{{ ride.origin }} -> {{ ride.destination }}</a></h2>
+                <div class="card__meta">
+                    <a href="#">{{ ride.when }}</a><br>
+                    <a>Number of Seats Remaining: {{ ride.available_seats }}</a>
+                </div>
+                <a href="/rides/{{ ride.id }}/">{{ ride.trip_summary }}</a>
+            </article>
+        </div>
+    </div>
+</div>
+<!--A Trip Detail Card End-->
+{% endblock content %}

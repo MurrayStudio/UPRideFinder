@@ -6,18 +6,14 @@
     <div class="wrapper">
 
         <div class="card radius shadowDepth1">
-            <div class="card__image border-tlr-radius">
-                <img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">
-            </div>
-
             <div class="card__content card__padding">
-                <div class="card__meta">
-                    <a href="#">{{ ride.when }}</a>
-                </div>
 
                 <article class="card__article">
-                    <h2><a href="#">{{ ride.origin }} -> {{ ride.destination }}</a></h2>
-                    <a href="/rides/{{ ride.id }}/">{{ ride.trip_summary }}</a>
+                    <h2><a href="/rides/{{ ride.id }}/">{{ ride.origin }} -> {{ ride.destination }}</a></h2>
+                    <div class="card__meta">
+                        <a href="#">{{ ride.when }}</a>
+                    </div>
+                    <a>{{ ride.trip_summary }}</a>
                 </article>
             </div>
         </div>
