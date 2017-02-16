@@ -41,13 +41,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">UP Ride Finder</a>
+                    <a class="navbar-brand" href="{% url 'triplist' %}">UP Ride Finder</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         {% block nav_items %}
-                        <li class="active"><a href="{% url 'home' %}">Some Page</a></li>
-                        <li><a href="{% url 'about' %}">Another Page</a></li>
+                        <li class="active"><a href="{% url 'createtrip' %}">Create Trip</a></li>
                         {% endblock nav_items %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
