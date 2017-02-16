@@ -1,6 +1,12 @@
 {% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
 <link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
-<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %} {% for ride in ride_list %}
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %}
+
+{% if ride_list|length <= 0 %}
+    <h2>No Trips</h2>
+{% endif %}
+
+ {% for ride in ride_list %}
 
 <!--A Trip Detail Card-->
 <div class="wrapper">
