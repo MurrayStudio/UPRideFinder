@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %}
+
+{% block content %}
+<form action="/rides/create/" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Submit" />
+</form>
+{% endblock content %}

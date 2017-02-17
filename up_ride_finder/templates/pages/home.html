@@ -1,69 +1,61 @@
-{% extends "base.html" %} 
-{% load staticfiles i18n compress%}
-
-{% block css %}
-{% load static %}
-<link href="{% static 'css/cover.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block nav %}
+{% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/cover.css' %}" rel="stylesheet"> {% endblock %} {% block nav %}
 <!-- No Nav -->
-{% endblock nav %}
-
-{% block container %}
+{% endblock nav %} {% block container %}
 <!-- No Container -->
-{% endblock container %}
-
-{% block content %}
+{% endblock container %} {% block content %}
 
 <body>
 
 
-    <div class="site-wrapper">
+  <div class="site-wrapper">
 
-      <div class="site-wrapper-inner">
+    <div class="site-wrapper-inner">
 
-        <div class="cover-container">
+      <div class="cover-container">
 
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">UP Ride Finder</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                        </li>
-                        {% endif %}
-                </ul>
-              </nav>
-            </div>
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h3 class="masthead-brand">UP Ride Finder</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'rides:list'  %}">{% trans "Trip List" %}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
           </div>
+        </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Your ride is here!</h1>
-            <p class="lead">Find rides to and from the University of Portland using this single online hub for UP community members only.</p>
-            <p class="lead">
-                <a id="sign-up-link" class="btn btn-lg btn-default" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-            </p>
+        <div class="inner cover">
+          <h1 class="cover-heading">Your ride is here!</h1>
+          <p class="lead">Find rides to and from the University of Portland using this single online hub for UP community members only.</p>
+          <p class="lead">
+            <a id="sign-up-link" class="btn btn-lg btn-default" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+          </p>
+        </div>
+
+        <div class="mastfoot">
+          <div class="inner">
+            <p>A project by the University of Portland CS department.</p>
           </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>A project by the University of Portland CS department.</p>
-            </div>
-          </div>
-
         </div>
 
       </div>
 
     </div>
-{% endblock content %}
+
+  </div>
+  {% endblock content %}
