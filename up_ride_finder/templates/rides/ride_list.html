@@ -15,7 +15,7 @@
         <div class="card__content card__padding">
 
             <article class="card__article">
-                <h2><a href="/rides/{{ ride.id }}/">{{ ride.origin_name }} -> {{ ride.dest_name }}</a></h2>
+                <h2><a href="{% url 'rides:detail' ride.id %}">{{ ride.origin_name }} -> {{ ride.dest_name }}</a></h2>
                 <div class="card__meta">
                     <a href="#">{{ ride.when }}</a>
                 </div>

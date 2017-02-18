@@ -18,7 +18,7 @@
                     <a href="#">{{ ride.when }}</a><br>
                     <a>Number of Seats Remaining: {{ ride.available_seats }}</a>
                 </div>
-                <a href="/rides/{{ ride.id }}/">{{ ride.trip_summary }}</a>
+                <a href="{% url 'rides:detail' ride.id %}">{{ ride.trip_summary }}</a>
             </article>
         </div>
     </div>
