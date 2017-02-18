@@ -263,3 +263,5 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
   }
+
+GOOGLE_MAPS_GEOCODING_KEY = 'AIzaSyBXFmdeTPJ-jRg-aKLS1ERksuWvM5FmC98'
