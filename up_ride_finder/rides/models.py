@@ -29,7 +29,7 @@ class Ride(models.Model):
     # Django has an automatic id field
 
     def __str__(self):
-        return self.trip_summary
+        return "({}) {} to {}".format(self.id, self.origin_name, self.dest_name)
 
     def save(self, *args, **kwargs):
         """
