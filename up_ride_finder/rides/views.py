@@ -23,6 +23,17 @@ class RideListView(LoginRequiredMixin, ListView):
     slug_field = 'id'
     slug_url_kwarg = 'id'
     context_object_name = 'ride_list'
+    # List 10 items per page.
+    # See https://docs.djangoproject.com/en/1.10/topics/pagination/
+    paginate_by = 10
+
+    def get_queryset(self):
+        """Sort the rides by creation date or by departure date
+        depending on the 'order_by' URL param."""
+        order_by = self.request.GET.get('order_by')
+        if order_by != "departure_date":
+            return Ride.objects.order_by('-created_date')
+        return Ride.objects.order_by('-when')
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
