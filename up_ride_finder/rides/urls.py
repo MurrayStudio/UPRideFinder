@@ -18,4 +18,9 @@ urlpatterns = [
         view=views.RideCreateView.as_view(),
         name='create'
     ),
+    url(
+        regex=r'^mine/$',
+        view=views.RideDrivingView.as_view(),
+        name='driving'
+    ),
 ]

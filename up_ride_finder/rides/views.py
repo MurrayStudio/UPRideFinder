@@ -49,3 +49,11 @@ class RideCreateView(LoginRequiredMixin, CreateView):
         """Set the driver to the user submitting this form."""
         form.instance.driver = self.request.user
         return super(RideCreateView, self).form_valid(form)
+
+
+class RideDrivingView(LoginRequiredMixin, ListView):
+    """View that lists only the rides the current user is the driver for."""
+    model = Ride
+
+    def get_queryset(self):
+        return Ride.objects.filter(driver__exact=self.request.user).order_by('-created_date')
