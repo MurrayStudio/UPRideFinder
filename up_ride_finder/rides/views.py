@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render
 
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -31,9 +33,10 @@ class RideListView(LoginRequiredMixin, ListView):
         """Sort the rides by creation date or by departure date
         depending on the 'order_by' URL param."""
         order_by = self.request.GET.get('order_by')
+        future_rides = Ride.objects.filter(when__gte=datetime.today())
         if order_by != "departure_date":
-            return Ride.objects.order_by('-created_date')
-        return Ride.objects.order_by('-when')
+            return future_rides.order_by('-created_date')
+        return future_rides.order_by('when')
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
