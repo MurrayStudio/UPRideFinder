@@ -40,17 +40,23 @@ class Ride(models.Model):
         Set the origin and destination to friendlier names if possible.
         """
         if not self.dest_name or not self.origin_name:
-            gmaps = googlemaps.Client(key=getattr(settings, 'GOOGLE_MAPS_GEOCODING_KEY', None))
+            gmaps = googlemaps.Client(key=getattr(settings, 'GOOGLE_MAPS_GEOCODING_KEY', None), timeout=5)
             if not self.dest_name:
-                gmaps_results = gmaps.geocode(self.destination)[0].get('formatted_address')
-                if 'USA' in gmaps_results:
-                    self.dest_name = gmaps_results
+                gmaps_results = gmaps.geocode(self.destination)
+                dest_name = ''
+                if len(gmaps_results):
+                    dest_name = gmaps_results[0].get('formatted_address')
+                if 'USA' in dest_name:
+                    self.dest_name = dest_name
                 else:
                     self.dest_name = self.destination
             if not self.origin_name:
-                gmaps_results = gmaps.geocode(self.origin)[0].get('formatted_address')
-                if 'USA' in gmaps_results:
-                    self.origin_name = gmaps_results
+                gmaps_results = gmaps.geocode(self.origin)
+                origin_name = ''
+                if len(gmaps_results):
+                    origin_name = gmaps_results[0].get('formatted_address')
+                if 'USA' in origin_name:
+                    self.origin_name = origin_name
                 else:
                     self.origin_name = self.origin
 
