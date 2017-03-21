@@ -82,9 +82,9 @@ class RideRequest(models.Model):
         (UNDECIDED, 'Undecided'),
     )
     ride = models.ForeignKey(
-        Ride, on_delete=models.CASCADE, related_name='ride')
+        Ride, on_delete=models.CASCADE)
     requester = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='requester')
+        User, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=2, choices=STATUS_CHOICES, default=UNDECIDED)
 
