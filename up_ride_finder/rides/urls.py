@@ -14,6 +14,11 @@ urlpatterns = [
         name='list'
     ),
     url(
+        regex=r'^~redirect/$',
+        view=views.RideRedirectView.as_view(),
+        name='redirect'
+    ),
+    url(
         regex=r'^create/$',
         view=views.RideCreateView.as_view(),
         name='create'
@@ -22,5 +27,10 @@ urlpatterns = [
         regex=r'^mine/$',
         view=views.RideDrivingView.as_view(),
         name='driving'
+    ),
+    url(
+        regex=r'^(?P<ride_id>[\d+]+)/request/$',
+        view=views.RideRequestCreateView.as_view(),
+        name='request'
     ),
 ]

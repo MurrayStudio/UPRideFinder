@@ -38,6 +38,12 @@ class RideCreateForm(forms.ModelForm):
         model = Ride
         fields = ['destination', 'origin', 'available_seats', 'cost', 'when', 'trip_summary']
 
+
+class RideRequestCreateForm(forms.ModelForm):
+    class Meta:
+        model = RideRequest
+        fields = ['notes']
+
     # def clean(self):
     #     """ Prevent the driver from being a rider """
     #     driver = self.cleaned_data.get('driver')

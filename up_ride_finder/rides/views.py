@@ -7,8 +7,8 @@ from django.views.generic import DetailView, ListView, RedirectView, UpdateView,
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Ride
-from .forms import RideCreateForm
+from .models import Ride, RideRequest
+from .forms import RideCreateForm, RideRequestCreateForm
 
 # Create your views here.
 
@@ -51,9 +51,33 @@ class RideCreateView(LoginRequiredMixin, CreateView):
         return super(RideCreateView, self).form_valid(form)
 
 
+class RideRedirectView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        return reverse_lazy(
+            'rides:detail', kwargs={'id': self.request.ride.id})
+
+
 class RideDrivingView(LoginRequiredMixin, ListView):
     """View that lists only the rides the current user is the driver for."""
     model = Ride
 
     def get_queryset(self):
-        return Ride.objects.filter(driver__exact=self.request.user).order_by('-created_date')
+        return Ride.objects.filter(
+            driver__exact=self.request.user).order_by('-created_date')
+
+
+class RideRequestCreateView(LoginRequiredMixin, CreateView):
+    model = RideRequest
+    form_class = RideRequestCreateForm
+    # ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
+
+    def form_valid(self, form):
+        # print(self.kwargs.get('ride_id'))
+        form.instance.ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
+        form.instance.requester = self.request.user
+        return super(RideRequestCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})

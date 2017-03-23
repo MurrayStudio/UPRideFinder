@@ -87,6 +87,7 @@ class RideRequest(models.Model):
         User, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=2, choices=STATUS_CHOICES, default=UNDECIDED)
+    notes = models.TextField(_('Notes'), blank=True)
 
     def is_decided(self):
         return self.status != self.UNDECIDED
