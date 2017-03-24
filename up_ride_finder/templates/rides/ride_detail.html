@@ -20,6 +20,9 @@
                 </div>
                 <a href="{% url 'rides:detail' ride.id %}">{{ ride.trip_summary }}</a>
             </article>
+            <div class="form-group">
+            </div>
+            <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary" value="Request">Request</a>
         </div>
     </div>
 </div>
