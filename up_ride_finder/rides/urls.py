@@ -9,6 +9,11 @@ urlpatterns = [
         name='detail'
     ),
     url(
+        regex=r'^(?P<id>[\d+]+)/json$',
+        view=views.RideJSONView.as_view(),
+        name='json'
+    ),
+    url(
         regex=r'^$',
         view=views.RideListView.as_view(),
         name='list'

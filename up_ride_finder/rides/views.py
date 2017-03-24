@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 
+from django.http import JsonResponse
+
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView
 
@@ -38,6 +40,17 @@ class RideListView(LoginRequiredMixin, ListView):
         if order_by != "departure_date":
             return future_rides.order_by('-created_date')
         return future_rides.order_by('when')
+
+
+class RideJSONView(LoginRequiredMixin, DetailView, ):
+    model = Ride
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    context_object_name = 'ride'
+
+    def render_to_response(self, context, **response_kwargs):
+        ride = Ride.objects.get(id=self.kwargs.get('id'))
+        return JsonResponse({'dest_name': ride.dest_name, 'origin_name': ride.origin_name})
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
