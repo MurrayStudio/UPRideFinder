@@ -5,15 +5,18 @@ function initMap() {
   });
   var geocoder = new google.maps.Geocoder();
 
+  var location;
+
   $.getJSON(window.location.href + "json", function (data) {
-    console.log(data);
+    location = data.dest_name;
+    console.log(location);
+    geocodeAddress(geocoder, map, location);
   });
 
-  geocodeAddress(geocoder, map);
 }
 
-function geocodeAddress(geocoder, resultsMap) {
-  var address = "Portland, Or";
+function geocodeAddress(geocoder, resultsMap, address) {
+  console.log(address);
   geocoder.geocode({ 'address': address }, function (results, status) {
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
