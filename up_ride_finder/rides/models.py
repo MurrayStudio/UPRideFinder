@@ -43,6 +43,9 @@ class Ride(models.Model):
     def get_absolute_url(self):
         return reverse('rides:detail', kwargs={'id': self.id})
 
+    # def get_requests(self):
+    #     self.r
+
     def save(self, *args, **kwargs):
         """
         Set the origin and destination to friendlier names if possible.

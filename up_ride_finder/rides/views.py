@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView
@@ -72,6 +72,14 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
     model = RideRequest
     form_class = RideRequestCreateForm
     # ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
+
+    def get_ride(self):
+        return Ride.objects.get(id=self.kwargs.get('ride_id'))
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     if self.get_ride().driver == self.request.user or self.get_ride().riderequest_set:
+    #         # TODO: Implement error messages
+    #         return redirect(reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')}))
 
     def form_valid(self, form):
         # print(self.kwargs.get('ride_id'))
