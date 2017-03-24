@@ -6,9 +6,12 @@
 <div class="wrapper">
 
     <div class="card radius shadowDepth1">
-        <div class="card__image border-tlr-radius">
-            <img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">
+        <div class="card__image border-tlr-radius" id="header">
+            <!--<img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">-->
+                    <h3>My Google Maps Demo</h3>
+        <div id="map"></div>
         </div>
+
 
         <div class="card__content card__padding">
 
@@ -27,4 +30,11 @@
     </div>
 </div>
 <!--A Trip Detail Card End-->
-{% endblock content %}
+{% endblock content %} {% block javascript %}
+<!-- place project specific Javascript in this file -->
+{% compress js %}
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjpGwtTIDXT2sQEf9lxmOMrACuUyStvu8&callback=initMap">
+</script>
+<script src="{% static 'js/places.js' %}"></script>
+{% endcompress %} {% endblock javascript %}

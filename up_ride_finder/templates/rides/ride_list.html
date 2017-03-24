@@ -9,11 +9,11 @@
 <!-- Small button group -->
 <div class="btn-group">
   <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Small button <span class="caret"></span>
+    Sort By: <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-
-    <li><a href="#">Alphabetical</a></li>
+    <li><a href="{% url 'rides:list' %}">Create Date</a></li>
+    <li><a href="?order_by=departure_date">Departure Date</a></li>
   </ul>
 </div>
 

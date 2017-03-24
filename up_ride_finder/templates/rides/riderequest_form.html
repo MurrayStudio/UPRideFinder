@@ -1,9 +1,10 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
 <link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
-<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %}
+<link href="{% static 'css/project.css' %}" rel="stylesheet">
+ {% endblock %}
 
 {% block content %}
-<form action="{% url 'rides:request' ride.id %}" method="post">
+<form action="{% url 'rides:request' view.get_ride.id %}" method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <input class="btn btn-primary" type="submit" value="Request" />

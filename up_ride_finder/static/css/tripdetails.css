@@ -222,3 +222,8 @@ h2 {
     .googleplus:hover {
         color: #eee;
     }
+
+#map {
+  height: 400px;
+  width: 100%;
+ }

@@ -32,7 +32,7 @@ class RideListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         """Sort the rides by creation date or by departure date
         depending on the 'order_by' URL param. By default, sort
-        rides by those departing soonest."""
+        rides by those created soonest."""
         order_by = self.request.GET.get('order_by')
         future_rides = Ride.objects.filter(when__gte=datetime.today())
         if order_by != "departure_date":
