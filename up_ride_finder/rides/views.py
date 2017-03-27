@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 
 from django.http import JsonResponse
 
+from django.forms.models import model_to_dict
+
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView
 
@@ -50,7 +52,8 @@ class RideJSONView(LoginRequiredMixin, DetailView, ):
 
     def render_to_response(self, context, **response_kwargs):
         ride = Ride.objects.get(id=self.kwargs.get('id'))
-        return JsonResponse({'dest_name': ride.dest_name, 'origin_name': ride.origin_name})
+        return JsonResponse(model_to_dict(ride, fields=['dest_name', 'origin_name']))
+        # return JsonResponse({'dest_name': ride.dest_name, 'origin_name': ride.origin_name})
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
