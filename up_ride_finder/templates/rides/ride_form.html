@@ -1,11 +1,31 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles i18n compress%} {% block css %} {% load static
+%}
 <link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
-<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %}
-
-{% block content %}
+<link href="{% static 'css/project.css' %}" rel="stylesheet">
+<link href="{% static 'css/clockpicker.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+/>{% endblock %} {% block content %}
 <form action="/rides/create/" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
+    {% csrf_token %} {{ form|crispy }}
     <input class="btn btn-primary" type="submit" value="Submit" />
+
+//examples of date and timne picker
+    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
 </form>
-{% endblock content %}
+
+<div class="input-group clockpicker" data-autoclose="true">
+    <input type="text" class="form-control" value="09:30">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+
+</form>
+{% endblock content %} {% block javascript %}
+<!-- place project specific Javascript in this file -->
+{% compress js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script src="{% static 'js/project.js' %}"></script>
+<script src="{% static 'js/clockpicker.js' %}"></script>
+<script src="{% static 'js/createtrip.js' %}"></script>
+{% endcompress %} {% endblock javascript %}
