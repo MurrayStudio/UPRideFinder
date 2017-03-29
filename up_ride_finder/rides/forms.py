@@ -1,5 +1,3 @@
-# from bootstrap3_datetime.widgets import DateTimePicker
-
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -41,20 +39,13 @@ class RideRequestAdminForm(forms.ModelForm):
 
 
 class RideCreateForm(forms.ModelForm):
-    # split_when = forms.SplitDateTimeField()
-    # when = forms.SplitDateTimeField()
 
     class Meta:
         model = Ride
         fields = ['destination', 'origin', 'available_seats', 'cost', 'when', 'trip_summary']
-        # widgets = {
-        #     'when': widgets.AdminSplitDateTime(),
-        # }
 
     def __init__(self, *args, **kwargs):
         super(RideCreateForm, self).__init__(*args, **kwargs)
-        # self.fields['when'] = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime())
-        # Monkey patch bootstrap3_datetime
         self.fields['when'].widget = DateTimePicker(options={'format': 'MM/DD/YYYY HH:mm', 'sideBySide': True})
 
 
