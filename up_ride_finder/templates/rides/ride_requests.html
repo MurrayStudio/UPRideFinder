@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
+<link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %}
+
+{% if request_list|length <= 0 %}
+    <h2>No Trips</h2>
+{% endif %}
+
+ {% for request in request_list %}
+
+<!--A Trip Detail Card-->
+<div class="wrapper">
+
+    <div class="card radius shadowDepth1">
+        <div class="card__content card__padding">
+
+            <article class="card__article">
+                <h2>{{ request.requester }} ({{ request.requester.email }})</h2>
+                <div class="card__meta">
+                    {{ request.get_status_display }}
+                </div>
+                <a>{{ request.notes }}</a>
+            </article>
+        </div>
+    </div>
+</div>
+<!--A Trip Detail Card End-->
+
+
+{% endfor %} {% endblock content %}

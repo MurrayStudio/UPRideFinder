@@ -2,9 +2,11 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 
 from django.forms.models import model_to_dict
+
+from django.core.exceptions import PermissionDenied
 
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView
@@ -105,3 +107,21 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})
+
+
+class RideRideRequestListView(LoginRequiredMixin, ListView):
+    model = RideRequest
+    slug_field = 'ride_id'
+    slug_url_kwarg = 'ride_id'
+    context_object_name = 'request_list'
+    template_name = 'rides/ride_requests.html'
+    # List 10 items per page.
+    # See https://docs.djangoproject.com/en/1.10/topics/pagination/
+    paginate_by = 10
+
+    def get_queryset(self):
+        ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
+        # Only a ride's driver can view a ride's requests
+        if ride.driver != self.request.user:
+            raise PermissionDenied
+        return ride.riderequest_set.all()

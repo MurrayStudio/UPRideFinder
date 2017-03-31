@@ -38,4 +38,9 @@ urlpatterns = [
         view=views.RideRequestCreateView.as_view(),
         name='request'
     ),
+    url(
+        regex=r'^(?P<ride_id>[\d+]+)/requests/$',
+        view=views.RideRideRequestListView.as_view(),
+        name='requests'
+    ),
 ]
