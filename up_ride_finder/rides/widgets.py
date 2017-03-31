@@ -56,25 +56,25 @@ class DateTimePicker(DateTimeInput):
         return format
 
     html_template = """
-    <div%(div_attrs)s>
-      <input%(input_attrs)s/>
+    <div{div_attrs}>
+      <input{input_attrs}/>
       <span class="input-group-addon">
-        <span%(icon_attrs)s></span>
+        <span{icon_attrs}></span>
       </span>
     </div>"""
 
     js_template = """
     <script>
-        (function(window) {
-            var callback = function() {
-                $(function(){$("#%(picker_id)s:has(input:not([readonly],[disabled]))").datetimepicker(%(options)s);});
-            };
+        (function(window) {{
+            var callback = function() {{
+                $(function(){{$("#{picker_id}:has(input:not([readonly],[disabled]))").datetimepicker({options});}});
+            }};
             if(window.addEventListener)
                 window.addEventListener("load", callback, false);
             else if (window.attachEvent)
                 window.attachEvent("onload", callback);
             else window.onload = callback;
-        })(window);
+        }})(window);
     </script>"""
 
     def __init__(self, attrs=None, format=None, options=None, div_attrs=None, icon_attrs=None):
@@ -116,11 +116,11 @@ class DateTimePicker(DateTimeInput):
             val) for key, val in self.div_attrs.items()}
         icon_attrs = {key: conditional_escape(
             val) for key, val in self.icon_attrs.items()}
-        html = self.html_template % dict(div_attrs=flatatt(div_attrs),
+        html = self.html_template.format(div_attrs=flatatt(div_attrs),
                                          input_attrs=flatatt(input_attrs),
                                          icon_attrs=flatatt(icon_attrs))
         if self.options:
-            js = self.js_template % dict(
+            js = self.js_template.format(
                 picker_id=picker_id, options=json.dumps(self.options or {}))
         else:
             js = ''
