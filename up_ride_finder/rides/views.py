@@ -9,7 +9,7 @@ from django.forms.models import model_to_dict
 from django.core.exceptions import PermissionDenied
 
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, CreateView, DeleteView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -67,6 +67,25 @@ class RideCreateView(LoginRequiredMixin, CreateView):
         """Set the driver to the user submitting this form."""
         form.instance.driver = self.request.user
         return super(RideCreateView, self).form_valid(form)
+
+
+class RideEditView(LoginRequiredMixin, UpdateView):
+    model = Ride
+    # form_class =
+
+
+class RideDeleteView(LoginRequiredMixin, DeleteView):
+    # See https://docs.djangoproject.com/en/1.10/ref/class-based-views/generic-editing/#deleteview
+    model = Ride
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    context_object_name = 'ride'
+    success_url = reverse_lazy('rides:list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user != self.get_object().driver:
+            raise PermissionDenied
+        return super(RideDeleteView, self).dispatch(request, *args, **kwargs)
 
 
 class RideRedirectView(LoginRequiredMixin, RedirectView):

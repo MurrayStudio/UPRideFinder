@@ -19,6 +19,11 @@ urlpatterns = [
         name='list'
     ),
     url(
+        regex=r'^(?P<id>[\d+]+)/delete/$',
+        view=views.RideDeleteView.as_view(),
+        name='delete'
+    ),
+    url(
         regex=r'^~redirect/$',
         view=views.RideRedirectView.as_view(),
         name='redirect'

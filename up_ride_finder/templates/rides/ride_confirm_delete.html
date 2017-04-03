@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles i18n compress%} {% block css %} {% load static %}
+<link href="{% static 'css/tripdetails.css' %}" rel="stylesheet">
+<link href="{% static 'css/project.css' %}" rel="stylesheet">
+ {% endblock %}
+
+{% block content %}
+<form action="{% url 'rides:delete' ride.id %}" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ ride }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+{% endblock content %}
