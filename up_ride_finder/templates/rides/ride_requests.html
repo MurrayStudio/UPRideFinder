@@ -6,7 +6,7 @@
     <h2>No Requests</h2>
 {% endif %}
 
- {% for request in request_list %}
+ {% for ride_request in request_list %}
 
 <!--A Trip Detail Card-->
 <div class="wrapper">
@@ -15,11 +15,11 @@
         <div class="card__content card__padding">
 
             <article class="card__article">
-                <h2>{{ request.requester }} ({{ request.requester.email }})</h2>
+                <h2>{{ ride_request.requester }} ({{ ride_request.requester.email }})</h2>
                 <div class="card__meta">
-                    {{ request.get_status_display }}
+                    {{ ride_request.get_status_display }}
                 </div>
-                <a>{{ request.notes }}</a>
+                <a>{{ ride_request.notes }}</a>
             </article>
         </div>
     </div>
