@@ -24,9 +24,9 @@
             </article>
             <div class="form-group">
             </div>
-            {% if ride_list|length <=0 %} <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary"
-                value="Request">Request</a>
-                {% endif %}
+            {% if request.user == ride.driver %}
+            <a href="{% url 'rides:requests' ride.id %}" type="submit" class="btn btn-primary" value="Request">Requests</a>            {% else %}
+            <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary" value="Request">Request</a>            {% endif %}
 
         </div>
     </div>
