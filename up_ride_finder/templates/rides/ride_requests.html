@@ -3,7 +3,7 @@
 <link href="{% static 'css/project.css' %}" rel="stylesheet"> {% endblock %} {% block content %}
 
 {% if request_list|length <= 0 %}
-    <h2>No Trips</h2>
+    <h2>No Requests</h2>
 {% endif %}
 
  {% for request in request_list %}
