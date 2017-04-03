@@ -114,7 +114,7 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
         return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})
 
     def send_email(self, request):
-        subject = request.POST.get('subject', 'Test')
+        subject = request.POST.get('subject', 'Request for a ride')
         message = request.POST.get('message', 'Test Message')
         from_email = request.POST.get('from_email', 'murrays17@up.edu')
         if subject and message and from_email:

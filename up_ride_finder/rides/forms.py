@@ -55,6 +55,17 @@ class RideRequestCreateForm(forms.ModelForm):
         model = RideRequest
         fields = ['notes']
 
+class ContactForm(forms.ModelForm):
+    
+    class Meta:   
+        model = Ride
+        fields = '__all__'
+        message = forms.CharField(widget=forms.Textarea)
+    
+    def clean(self):
+         driver = self.cleaned_data.get('driver')
+
+
     # def clean(self):
     #     """ Prevent the driver from being a rider """
     #     driver = self.cleaned_data.get('driver')
