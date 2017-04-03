@@ -2,6 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from django.core.mail import send_mail, BadHeaderError
+
 from django.contrib.admin import widgets
 
 from .models import Ride, RideRequest
@@ -54,6 +56,26 @@ class RideRequestCreateForm(forms.ModelForm):
     class Meta:
         model = RideRequest
         fields = ['notes']
+
+    def send_email(self):
+        subject = 'Request for a ride'
+        message = self.cleaned_data.get('notes', 'Test Message')
+        from_email = self.instance.requester.email
+        try:
+            return send_mail(subject, message, from_email, [self.instance.ride.driver.email])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+
+# class ContactForm(forms.ModelForm):
+    
+#     class Meta:   
+#         model = Ride
+#         fields = '__all__'
+#         message = forms.CharField(widget=forms.Textarea)
+    
+#     def clean(self):
+#          driver = self.cleaned_data.get('driver')
+
 
     # def clean(self):
     #     """ Prevent the driver from being a rider """

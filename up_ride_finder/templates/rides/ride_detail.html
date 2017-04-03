@@ -7,7 +7,6 @@
 
     <div class="card radius shadowDepth1">
         <div class="card__image border-tlr-radius" id="header">
-            <!--<img src="http://www.parkeasier.com/wp-content/uploads/2015/04/Seattle-Skyline.jpg" alt="image" class="border-tlr-radius">-->
             <div id="map"></div>
         </div>
 
@@ -15,7 +14,12 @@
         <div class="card__content card__padding">
 
             <article class="card__article">
-                <h2><a href="#">{{ ride.origin_name }} -> {{ ride.dest_name }}</a></h2>
+                    <div id="to_from">
+                    <h2>From: {{ ride.origin_name }}</h2>
+                    <h2>To: {{ ride.dest_name }}</h2>
+
+                <hr>
+
                 <div class="card__meta">
                     <a href="#">{{ ride.when }}</a><br>
                     <a>Number of Seats Remaining: {{ ride.available_seats }}</a>
@@ -25,6 +29,7 @@
             <div class="form-group">
             </div>
             {% if request.user == ride.driver %}
+            <h3>This ride belongs to you. See passenger requests.</h3>
             <a href="{% url 'rides:requests' ride.id %}" type="submit" class="btn btn-primary" value="Request">Requests</a>            {% else %}
             <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary" value="Request">Request</a>            {% endif %}
 

@@ -8,16 +8,16 @@
 
 <!-- Small button group -->
 <div class="btn-group">
-  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort By: <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu">
-    <li><a href="{% url 'rides:list' %}">Create Date</a></li>
-    <li><a href="?order_by=departure_date">Departure Date</a></li>
-  </ul>
+    <ul class="dropdown-menu">
+        <li><a href="{% url 'rides:list' %}">Create Date</a></li>
+        <li><a href="?order_by=departure_date">Departure Date</a></li>
+    </ul>
 </div>
 
- {% for ride in ride_list %}
+{% for ride in ride_list %}
 
 <!--A Trip Detail Card-->
 <div class="wrapper">
@@ -26,14 +26,22 @@
         <div class="card__content card__padding">
 
             <article class="card__article">
-                <h2><a href="{% url 'rides:detail' ride.id %}">{{ ride.origin_name }} -> {{ ride.dest_name }}</a></h2>
-                <div class="card__meta">
-                    <a href="#">{{ ride.when }}</a>
-                </div>
-                <a>{{ ride.trip_summary }}</a>
-            </article>
+                <a href="{% url 'rides:detail' ride.id %}">
+                    <div id="to_from">
+                    <h2>From: {{ ride.origin_name }}</h2>
+                    <h2>To: {{ ride.dest_name }}</h2>
+                </a>
         </div>
+        <hr>
+
+        <div class="card__meta">
+            <p id="when">{{ ride.when }}</p>
+        </div>
+
+        <p id="summary"> {{ ride.trip_summary }}</p>
+        </article>
     </div>
+</div>
 </div>
 <!--A Trip Detail Card End-->
 

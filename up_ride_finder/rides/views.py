@@ -16,6 +16,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Ride, RideRequest
 from .forms import RideCreateForm, RideRequestCreateForm
 
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+
 # Create your views here.
 
 
@@ -55,7 +58,8 @@ class RideJSONView(LoginRequiredMixin, DetailView, ):
     def render_to_response(self, context, **response_kwargs):
         ride = Ride.objects.get(id=self.kwargs.get('id'))
         return JsonResponse(model_to_dict(ride, fields=['dest_name', 'origin_name']))
-        # return JsonResponse({'dest_name': ride.dest_name, 'origin_name': ride.origin_name})
+        # return JsonResponse({'dest_name': ride.dest_name, 'origin_name':
+        # ride.origin_name})
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
@@ -116,16 +120,35 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
     # def dispatch(self, request, *args, **kwargs):
     #     if self.get_ride().driver == self.request.user or self.get_ride().riderequest_set:
     #         # TODO: Implement error messages
-    #         return redirect(reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')}))
+    # return redirect(reverse_lazy('rides:detail', kwargs={'id':
+    # self.kwargs.get('ride_id')}))
 
     def form_valid(self, form):
         # print(self.kwargs.get('ride_id'))
         form.instance.ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
         form.instance.requester = self.request.user
+        form.send_email()
         return super(RideRequestCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})
+
+    # def send_email(self, request):
+    #     if request.method == 'GET':
+    #         form = ContactForm()
+    #     else:
+    #         form = ContactForm(request.POST)
+    #         if self.form_valid(form):
+    #             subject = request.POST.get('subject', 'Request for a ride')
+    #             message = request.POST.get('message', 'Test Message')
+    #             from_email = request.POST.get('from_email', 'murrays17@up.edu')
+    #             try:
+    #                 send_mail(subject, message, from_email, ['admin@example.com'])
+    #             except BadHeaderError:
+    #                 return HttpResponse('Invalid header found.')
+    #             return HttpResponseRedirect('detail')
+    #         else:
+    #             return render(request, "/rides/home.html")
 
 
 class RideRideRequestListView(LoginRequiredMixin, ListView):

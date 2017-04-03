@@ -34,10 +34,26 @@ a {
     a:hover {
         color: #2980b9;
     }
+    
+#when {
+    font-size: 1.3em;
+}
+
+#to_from{
+    color: #444444;
+    font-weight: 50;
+}
 
 h2 {
     line-height: 1.2;
     margin-bottom: 1.6rem;
+}
+
+h3 {
+    line-height: 1.2;
+    margin-bottom: 1.6rem;
+    font-size: 1.2em;
+    color: #000;
 }
 
 .wrapper {
