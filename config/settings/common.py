@@ -38,7 +38,7 @@ THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
-    'phonenumber_field',
+    # 'phonenumber_field',
 #    'allauth.socialaccount',  # registration
 )
 
