@@ -16,6 +16,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Ride, RideRequest
 from .forms import RideCreateForm, RideRequestCreateForm
 
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+
 # Create your views here.
 
 
@@ -55,7 +58,8 @@ class RideJSONView(LoginRequiredMixin, DetailView, ):
     def render_to_response(self, context, **response_kwargs):
         ride = Ride.objects.get(id=self.kwargs.get('id'))
         return JsonResponse(model_to_dict(ride, fields=['dest_name', 'origin_name']))
-        # return JsonResponse({'dest_name': ride.dest_name, 'origin_name': ride.origin_name})
+        # return JsonResponse({'dest_name': ride.dest_name, 'origin_name':
+        # ride.origin_name})
 
 
 class RideCreateView(LoginRequiredMixin, CreateView):
@@ -97,7 +101,8 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
     # def dispatch(self, request, *args, **kwargs):
     #     if self.get_ride().driver == self.request.user or self.get_ride().riderequest_set:
     #         # TODO: Implement error messages
-    #         return redirect(reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')}))
+    # return redirect(reverse_lazy('rides:detail', kwargs={'id':
+    # self.kwargs.get('ride_id')}))
 
     def form_valid(self, form):
         # print(self.kwargs.get('ride_id'))
@@ -107,6 +112,21 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})
+
+    def send_email(self, request):
+        subject = request.POST.get('subject', 'Test')
+        message = request.POST.get('message', 'Test Message')
+        from_email = request.POST.get('from_email', 'murrays17@up.edu')
+        if subject and message and from_email:
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return HttpResponseRedirect('/contact/thanks/')
+        else:
+                # In reality we'd use a form class
+                # to get proper validation errors.
+            return HttpResponse('Make sure all fields are entered and valid.')
 
 
 class RideRideRequestListView(LoginRequiredMixin, ListView):
