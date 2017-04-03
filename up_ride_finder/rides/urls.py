@@ -43,4 +43,5 @@ urlpatterns = [
         view=views.RideRideRequestListView.as_view(),
         name='requests'
     ),
+    
 ]

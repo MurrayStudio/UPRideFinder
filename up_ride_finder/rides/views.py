@@ -108,25 +108,28 @@ class RideRequestCreateView(LoginRequiredMixin, CreateView):
         # print(self.kwargs.get('ride_id'))
         form.instance.ride = Ride.objects.get(id=self.kwargs.get('ride_id'))
         form.instance.requester = self.request.user
+        form.send_email()
         return super(RideRequestCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('rides:detail', kwargs={'id': self.kwargs.get('ride_id')})
 
-    def send_email(self, request):
-        subject = request.POST.get('subject', 'Request for a ride')
-        message = request.POST.get('message', 'Test Message')
-        from_email = request.POST.get('from_email', 'murrays17@up.edu')
-        if subject and message and from_email:
-            try:
-                send_mail(subject, message, from_email, ['admin@example.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return HttpResponseRedirect('/contact/thanks/')
-        else:
-                # In reality we'd use a form class
-                # to get proper validation errors.
-            return HttpResponse('Make sure all fields are entered and valid.')
+    # def send_email(self, request):
+    #     if request.method == 'GET':
+    #         form = ContactForm()
+    #     else:
+    #         form = ContactForm(request.POST)
+    #         if self.form_valid(form):
+    #             subject = request.POST.get('subject', 'Request for a ride')
+    #             message = request.POST.get('message', 'Test Message')
+    #             from_email = request.POST.get('from_email', 'murrays17@up.edu')
+    #             try:
+    #                 send_mail(subject, message, from_email, ['admin@example.com'])
+    #             except BadHeaderError:
+    #                 return HttpResponse('Invalid header found.')
+    #             return HttpResponseRedirect('detail')
+    #         else:
+    #             return render(request, "/rides/home.html")
 
 
 class RideRideRequestListView(LoginRequiredMixin, ListView):
