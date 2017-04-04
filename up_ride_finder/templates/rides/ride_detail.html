@@ -29,7 +29,7 @@
             <div class="form-group">
             </div>
             {% if request.user == ride.driver %}
-                <h3>This ride belongs to you. See passenger requests.</h3>
+                <h3>This trip belongs to you.</h3>
                 <a href="{% url 'rides:requests' ride.id %}" type="submit" class="btn btn-primary" value="Request">Requests</a>
                 <a href="{% url 'rides:delete' ride.id %}" class="btn btn-danger">Delete</a>
             {% else %}
