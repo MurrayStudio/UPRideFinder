@@ -22,16 +22,19 @@
 
                 <div class="card__meta">
                     <a href="#">{{ ride.when }}</a><br>
-                    <a>Number of Seats Remaining: {{ ride.available_seats }}</a>
+                    <a>Number of Seats: {{ ride.available_seats }}</a>
                 </div>
                 <a href="{% url 'rides:detail' ride.id %}">{{ ride.trip_summary }}</a>
             </article>
             <div class="form-group">
             </div>
             {% if request.user == ride.driver %}
-            <h3>This ride belongs to you. See passenger requests.</h3>
-            <a href="{% url 'rides:requests' ride.id %}" type="submit" class="btn btn-primary" value="Request">Requests</a>            {% else %}
-            <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary" value="Request">Request</a>            {% endif %}
+                <h3>This ride belongs to you. See passenger requests.</h3>
+                <a href="{% url 'rides:requests' ride.id %}" type="submit" class="btn btn-primary" value="Request">Requests</a>
+                <a href="{% url 'rides:delete' ride.id %}" class="btn btn-danger">Delete</a>
+            {% else %}
+                <a href="{% url 'rides:request' ride.id %}" type="submit" class="btn btn-primary" value="Request">Request</a>
+            {% endif %}
 
         </div>
     </div>
